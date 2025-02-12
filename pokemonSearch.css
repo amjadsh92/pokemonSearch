@@ -28,6 +28,8 @@
     margin: 0 auto 0 auto;
   }
 
+ 
+
   .pokemon-container{
     width:400px;
     margin:20px auto 20px auto;
@@ -135,15 +137,16 @@
 
 
 
-.strength{
+.strength1, .strength2{
     margin: 10px 6px 10px 0px;
     width:60px;
-    height:30px;
+    height:30px; 
     background-color:rgb(255 94 0);
     text-align:center;
     align-content:center;
     border-radius:5px;
     font-size:12px;
+    display:none;
 }
 .pokemon-characteristics{
     margin-bottom:20px;
@@ -188,3 +191,12 @@
     font-weight:bold;
 }
 
+
+.hide *{
+    display:none
+ } 
+
+
+.grass{
+    background-color:#78cc55;
+} 
