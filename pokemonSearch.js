@@ -28,13 +28,6 @@ const fetchData = async (api_endpoint) => {
     }
   };
 
- const getPokemonCharacters = async () => {
-
-    pokemonCharacters = await fetchData("https://pokeapi-proxy.freecodecamp.rocks/api/pokemon")
-    pokemonCharacters = pokemonCharacters["results"]
-
- }  
-
 
 const getPokemon =  async (idOrName) =>{
 
@@ -54,7 +47,7 @@ class pokemonCharacter {
         this.speed="";
         this.strength1="";
         this.strength2="";
-       // this.exist = (idOrName) => this.getPokemonCharacter(idOrName)
+       
     }
 
     exist = async (idOrName) => {
@@ -109,10 +102,9 @@ else{
 }
 
 const getPokemonCharacter = async(idOrName) => {
+    await pokemonCharactersPromise;
 
-    await getPokemonCharacters()
-
-     const pokemon = await getPokemon(idOrName)
+    const pokemon = await getPokemon(idOrName)
 
     return pokemon
     
@@ -122,10 +114,13 @@ const getPokemonCharacter = async(idOrName) => {
 }
 
 const showPokemonCharacter = async (idOrName)=>{
-     debugger;
+     
      const pokemon = await getPokemonCharacter(idOrName)
+
      if(pokemon){
+     
      reset()
+
      pokemonName.innerText= `${pokemon.name} #${pokemon.id}`;
      weightAndHeight.innerText = `Weight: ${pokemon.weight} Height: ${pokemon.height}`
      pokemonImage.src= `${pokemon.image}`
@@ -231,11 +226,6 @@ const showPokemonCharacter = async (idOrName)=>{
 
      } 
 
-
-
-
-     
-     
      pokemonCharacter.classList.remove("hide")
      
     }
@@ -275,12 +265,48 @@ const reset =()=>{
 searchButton.addEventListener("click", () => showPokemonCharacter(pokemonToFind.value))
 
 
+// IIFE
 
+
+let pokemonCharactersPromise = (async () => {
+
+    pokemonCharacters = await fetchData("https://pokeapi-proxy.freecodecamp.rocks/api/pokemon")
+    pokemonCharacters = pokemonCharacters["results"]
+
+    return pokemonCharacters;
+
+ })();
+
+
+(async function() {
+
+    console.log(await pokemonCharactersPromise);
+    console.log(await pokemonCharactersPromise);
+    console.log(await pokemonCharactersPromise);
+    console.log(await pokemonCharactersPromise);
+    console.log(await pokemonCharactersPromise);
+    console.log(await pokemonCharactersPromise);
+    console.log(await pokemonCharactersPromise);
+    console.log(await pokemonCharactersPromise);
+    console.log(await pokemonCharactersPromise);
+    console.log(await pokemonCharactersPromise);
+    console.log(await pokemonCharactersPromise);
+    console.log(await pokemonCharactersPromise);
+    console.log(await pokemonCharactersPromise);
+
+})();
 
   
+function create_promise(resolve_value, timeout) {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            resolve(resolve_value)
+        }, timeout);
+    });
+}
 
+p1 = create_promise("abcd", 3000);
 
-
-
-
-  
+p1.then((r) => {
+    console.log("resolve: " + r)
+})
