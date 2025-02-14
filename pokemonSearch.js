@@ -13,6 +13,7 @@ const defense = document.getElementById('stat-defense');
 const spAttack = document.getElementById('stat-spAttack');
 const spDefense = document.getElementById('stat-spDefense');
 const speed = document.getElementById('stat-speed');
+const searchForm = document.getElementById('search');
 
 
 const color ={
@@ -94,7 +95,7 @@ class pokemonChar {
 
     setCharacteristics = async (pokemonCharacter, characteristics) => {
         
-                this.name += pokemonCharacter.name
+                this.name += (pokemonCharacter.name).toUpperCase()
                 this.id += pokemonCharacter.id
                 this.weight += characteristics.weight
                 this.height += characteristics.height
@@ -113,7 +114,7 @@ class pokemonChar {
       
 
 const showPokemonCharacter = async (idOrName)=>{
-
+    
     const pokemon = await getPokemonCharacter(idOrName)
 
     if(pokemon){
@@ -132,13 +133,13 @@ const showPokemonCharacter = async (idOrName)=>{
 
     if(pokemon.strength1){
         strength1.style.display="block";
-        strength1.innerText = `${pokemon.strength1}`
+        strength1.innerText = `${(pokemon.strength1).toUpperCase()}`
         strength1.style.backgroundColor = color[pokemon.strength1] ? color[pokemon.strength1] : "#b7b7aa"
     } 
 
     if(pokemon.strength2){
         strength2.style.display="block";
-        strength2.innerText = `${pokemon.strength2}`
+        strength2.innerText = `${(pokemon.strength2).toUpperCase()}`
         strength2.style.backgroundColor = color[pokemon.strength2] ? color[pokemon.strength2] : "#b7b7aa"       
 
     } 
@@ -147,8 +148,11 @@ const showPokemonCharacter = async (idOrName)=>{
 
     }
     else{
+        if(idOrName){
+        debugger;    
         alert("Pokémon not found")
         reset()
+        }
     }
         
     }
@@ -187,7 +191,7 @@ return pokemon
 // IIFE
 
 let pokemonCharactersPromise = (async () => {
-
+      
     let pokemonCharacters = await fetchData("https://pokeapi-proxy.freecodecamp.rocks/api/pokemon")
     pokemonCharacters = pokemonCharacters["results"]
 
@@ -195,10 +199,28 @@ let pokemonCharactersPromise = (async () => {
 
  })();
 
- searchButton.addEventListener("click", () => showPokemonCharacter(pokemonToFind.value))
-
- pokemonToFind.addEventListener("keydown", (event) => {
-    if (event.key === "Enter") {
-        showPokemonCharacter(pokemonToFind.value);
+ searchButton.addEventListener("click", () => {
+    showPokemonCharacter((pokemonToFind.value).toLowerCase())
     }
-  });
+)
+ 
+
+//  pokemonToFind.addEventListener("keydown", (event) => {
+//    if (event.key === "Enter") {
+//      showPokemonCharacter(pokemonToFind.value.toLowerCase());
+//    }
+//  });
+
+  searchForm.addEventListener("submit", function(event) {
+    
+    event.preventDefault();
+    
+  })
+
+
+//    searchForm.addEventListener("keydown", function(event) {
+//      event.preventDefault();
+    
+
+    
+//    })

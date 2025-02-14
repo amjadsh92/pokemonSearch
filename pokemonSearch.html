@@ -12,14 +12,19 @@
     <main>
         <img src="https://cdn.freecodecamp.org/platform/universal/fcc_primary.svg" alt="freeCodeCamp Logo" />
         <h1>Pokemon Search APP</h1>
+
         <div class="pokemon-container" id="pokemon-container">
+           
+             
             <p>Search for Pokemon Name or ID:</p>
+            <form id="search">
            <div class="search-for-pokemon">
 
+            
             <div class="input-outer-border">
                 <div class="input-inner-border">
                  
-                    <input type="text" class="input-pokemon" id="input-pokemon">
+                    <input type="text" class="input-pokemon" id="input-pokemon" required>
 
             </div>
             
@@ -27,10 +32,10 @@
             
             </div>
 
-            <button class="search-btn" id="search-btn"> Search</button>
-
+            <button type="submit" class="search-btn" id="search-btn"> Search</button>
+          
            </div>
-           
+           </form>
           <div id="pokemon-character" class="pokemon-character hide">
            <p  class="pokemon-name" id="pokemon-name"></p>   
            <p  id="weight-height" class="weight-height"></p>
@@ -103,7 +108,7 @@
 
       </div>       
 
-
+          
         </div>
 
 
